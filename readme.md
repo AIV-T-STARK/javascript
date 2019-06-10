@@ -3,8 +3,8 @@
 ## Sự khác nhau giữa let và var
 
 - var cho phép khai báo lại biến, còn let thì không.
--	var thì có tính chất hoisting, let thì không.
--	let chỉ tồn tại trong block scope, biến sẽ chết khi ra ngoài scope.
+-	var thì có tính chất hoisting, let thì không. (cơ bản là thằng JS sẽ biên dịch trước sau đó mới thông dịch)
+-	let chỉ tồn tại trong block scope, biến sẽ chết khi ra ngoài scope.(var không có khái niệm block scope)
 
 ## Object
 ### 1. Cách 1: Object literal
@@ -167,7 +167,7 @@ var x = person.showName;
 x(); //VNP Group
 // Dữ liệu là các biến toàn cục => this ở đây tham chiếu đến [object Window]
 ```
-giải quết:
+giải quyết:
 ```
 var x = person.showName.bind(person);
 x(); //Nguyen Gia Hao
