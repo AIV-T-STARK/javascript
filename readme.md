@@ -7,7 +7,7 @@
 -	let chỉ tồn tại trong block scope, biến sẽ chết khi ra ngoài scope.
 
 ## Object
-1. Cách 1: Object literal
+### 1. Cách 1: Object literal
 
 ```
 // Khai báo toàn bộ các trường và hàm
@@ -23,7 +23,7 @@ var person = {
 
 - Class đâu? Không có class thì sao có Object?
 
-2. Cách 2 : Object constructor
+### 2. Cách 2 : Object constructor
 
 ```
 var psn = new Object();
@@ -36,7 +36,7 @@ psn.showName = function() {
 
 - Ta có thể hiểu toàn bộ object đều có class chung là Object
 
-3. Cách 3 :
+### 3. Cách 3 :
 - 1 function sẽ đóng vai trò constructor để khởi tạo Object.
 ```
 function Person(firstName, lastName) {
@@ -173,7 +173,54 @@ var x = person.showName.bind(person);
 x(); //Nguyen Gia Hao
 ```
 ## Prototype
+- Trong JS bất cứ cái gì cũng là 1 object (1 string, 1 number, 1 hàm, 1 array, ... - trừ undefined).
+- Tất cả các object đều có 1 prototype(prototype cũng là 1 object) và các object này thừa kế các thuộc tính và phương thức từ prototype của mình.
+VD: - 1 chuỗi “abc” là 1 obj, nó được có các thuộc tính và phương thức từ String.prototype,
+		- var abc = new animal(a,b); --> obj này kế thừa từ animal.prototype, animal.prototype lại được kế thừa từ Object.prototype.
+- Như vậy chúng ta có thể thêm thuộc tính hay phương thức cho object.
+
 
 ## Sử lý bất đồng bộ
+
+```
+var photo = downloadPhoto('http://example.com/abc.png');
+// Biến photo vẫn chưa được xác định
+```
+- Trong ví dụ trên, chương trình sẽ chờ cho bức ảnh được load song thì mới chạy tiếp -> không tốt chút nào.
+
+- Để giải quyết vấn đề này, chúng ta có thể sử dụng callback: 
+
+```
+var photo = downloadPhoto('http://example.com/abc.png', finish);
+
+function finish (error, photo) {
+  if (error) {
+    console.error('Download error!', error);
+  }
+  else {
+    console.log('Download finished', photo);
+  }
+}
+```
+Việc load ảnh diễn ra nhưng những code bên dưới vẫn chạy bình thường
+Khi ảnh được load xong(hoặc false), hàm finish được gọi.
+
+- callback hell: 
+
+```
+var load = load1('photo1' , function() {
+                  load2('photo2', function() {
+                        load3('photo3', function() {
+                              load4('photo4', function() {
+                                  //more....
+                              })
+                        })
+                  })
+})
+
+// đây chỉ là ví dụ, không biết có dúng không
+```
+
+- sử dụng promise để giải quyết:
 
 
