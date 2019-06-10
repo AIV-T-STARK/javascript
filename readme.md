@@ -205,21 +205,7 @@ function finish (error, photo) {
 Việc load ảnh diễn ra nhưng những code bên dưới vẫn chạy bình thường
 Khi ảnh được load xong(hoặc false), hàm finish được gọi.
 
-- callback hell: 
-
-```
-var load = load1('photo1' , function() {
-                  load2('photo2', function() {
-                        load3('photo3', function() {
-                              load4('photo4', function() {
-                                  //more....
-                              })
-                        })
-                  })
-})
-
-// đây chỉ là ví dụ, không biết có dúng không
-```
+- callback hell:
 
 ```
 function xoay() {
@@ -245,6 +231,36 @@ function hinhVuongXoay($hinhVuong) {
 }
 ```
 
-- sử dụng promise để giải quyết:
+```
+loadPhoto('photo1' , function() {
+  loadPhoto('photo2', function() {
+    loadPhoto('photo3', function() {
+      loadPhoto('photo4', function() {
+        loadPhoto('photo5', function() {
+          //more....
+        })
+      })
+    })
+  })
+})
 
+function loadPhoto($photo) {
+  //code...
+}
+
+// đây chỉ là ví dụ, không biết có dúng không
+```
+
+- sử dụng promise để giải quyết:
+```
+function loadPhoto($photo) {
+  //code...
+}
+
+loadPhoto('photo1')
+  .then(() => loadPhoto('photo2'))
+  .then(() => loadPhoto('photo3'))
+  .then(() => loadPhoto('photo4'))
+  .then(() => loadPhoto('photo5'));
+```
 
