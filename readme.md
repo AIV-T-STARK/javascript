@@ -221,6 +221,30 @@ var load = load1('photo1' , function() {
 // đây chỉ là ví dụ, không biết có dúng không
 ```
 
+```
+function xoay() {
+  setimeout(function() {
+    hinhVuongXoay($hv1);
+    settimeout(function(){
+      hinhVuongXoay($hv2);
+      settimeout(function(){
+        hinhVuongXoay($hv3);
+        settimeout(function(){
+          hinhVuongXoay($hv4);
+          settimeout(function(){
+            //more .....
+          }, 1000);
+        }, 1000);
+      }, 1000);
+    }, 1000);
+  }, 1000);
+}
+
+function hinhVuongXoay($hinhVuong) {
+  //code ...
+}
+```
+
 - sử dụng promise để giải quyết:
 
 
